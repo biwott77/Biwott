@@ -1,0 +1,203 @@
+.home {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.home-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  /* text-shadow: 2px 2px 4px rgba(0,0,0,0.5); */
+}
+
+.home h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #61dafb;
+}
+
+.home p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.cta-button {
+  background-color: #61dafb;
+  color: #1a1a1a;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.cta-button:hover {
+  background-color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(97, 218, 251, 0.3);
+}
+
+.skills-certifications {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.skill-cert-container {
+  background-color: #1a2a3a;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: left;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.skill-cert-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.skill-cert-container h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #61dafb;
+  text-align: center;
+  height: 2em; /* Adjust this value as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-cert-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 40%;
+}
+
+.skill-cert-container li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  padding-left: 30px;
+  position: relative;
+}
+
+.skill-cert-container li::before {
+  content: '\2713'; /* Unicode character for checkmark */
+  position: absolute;
+  left: 0;
+  color: #61dafb; /* Color of the checkmark */
+  font-weight: bold;
+}
+
+.animated-images-container {
+  background-color: #1a2a3a; /* Same background color as skill-cert-container */
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem; /* Same margin as skills-certifications */
+  overflow: hidden; /* Ensure images don't overflow during animation */
+  margin: 40px;
+}
+
+.animated-images {
+  position: relative;
+  height: 120px; /* Set a fixed height for the container */
+}
+
+.image-container {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  animation: moveLeftToRight 15s linear infinite;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@keyframes moveLeftToRight {
+  0% {
+    left: -100px; /* Start off-screen to the left */
+  }
+  100% {
+    left: 100%; /* End off-screen to the right */
+  }
+}
+
+/* Stagger the animation for each image */
+.image-container:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.image-container:nth-child(2) {
+  animation-delay: 5s;
+}
+
+.image-container:nth-child(3) {
+  animation-delay: 10s;
+}
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+.marquee-text {
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+  color: rgb(0, 255, 0);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+/* ... other styles ... */
+
+.intro-container {
+  background-color: #1a2a3a; /* Same background color as other containers */
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.intro-container h2 {
+  margin-bottom: 1rem;
+}
+
+.intro-container p {
+  margin-bottom: 1.5rem;
+}
+
+.cta-button {
+  display: inline-block;
+  /* ... existing cta-button styles ... */
+}
+
+.cert-list{
+  margin-bottom: 20px;
+}

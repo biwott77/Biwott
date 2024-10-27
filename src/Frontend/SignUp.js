@@ -1,6 +1,6 @@
-// src/components/Signup.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/SignUp.css';
 
 const Signup = () => {
     const [username, setUsername] = useState('');

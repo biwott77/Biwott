@@ -1,18 +1,23 @@
 .home {
-  padding-top: 80px;
+  width: 100%;
   min-height: 100vh;
+  /* margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%); */
+  padding: 80px 0 30px; /* Adjust top padding to account for navbar */
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
-  color: #ffffff;
-  margin-bottom: 30px;
+  justify-content: space-between;
 }
 
 .home-content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
+  width: 100%;
+  max-width: 1200px; /* Match this with your app container max-width */
+  padding: 0 20px;
+  box-sizing: border-box;
+  flex-grow: 1;
 }
 
 .home h1 {
@@ -55,10 +60,13 @@
 }
 
 .skills-certifications {
+  width: 100%;
+  max-width: 1200px; /* Match this with your app container max-width */
+  padding: 0 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  width: 100%;
   margin-top: 2rem;
 }
 
@@ -200,4 +208,149 @@
 
 .cert-list{
   margin-bottom: 20px;
+}
+
+.animated-thank-you {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #61dafb;
+  animation: fadeInOut 4s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(20px); }
+  50% { opacity: 1; transform: translateY(0); }
+}
+@media screen and (max-width: 280px) {
+  .intro-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .intro-container h2 {
+    font-size: 1.2rem;
+  }
+
+  .intro-container p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Media Queries for different screen sizes */
+@media screen and (max-width: 1024px) {
+  .intro-container h1 {
+    font-size: 3rem;
+  }
+
+  .intro-container h2 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .intro-container h1 {
+    font-size: 2.5rem;
+  }
+
+  .intro-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .intro-container p {
+    font-size: 1.1rem;
+  }
+
+  .image-container {
+    width: 45%;
+  }
+
+  .skills-certifications {
+    padding: 0 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home {
+    padding: 60px 0 20px;
+  }
+
+  .intro-container h1 {
+    font-size: 2rem;
+  }
+
+  .intro-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-container p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .image-container {
+    width: 100%;
+  }
+
+  .cta-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .skill-cert-container {
+    padding: 15px;
+  }
+
+  .skill-cert-container li {
+    padding: 8px 16px;
+    margin: 4px;
+    font-size: 0.9rem;
+  }
+
+  .animated-thank-you {
+    font-size: 1.2rem;
+    padding: 15px 0;
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 320px) {
+  .intro-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .intro-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .home-content {
+    padding: 0 15px;
+  }
+}
+
+/* For handling height on smaller devices */
+@media screen and (max-height: 700px) {
+  .home {
+    padding: 40px 0 20px;
+  }
+
+  .intro-container {
+    margin-bottom: 20px;
+  }
+}
+
+/* Ensure text doesn't overflow on very small widths */
+@media screen and (max-width: 280px) {
+  .intro-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .intro-container h2 {
+    font-size: 1.2rem;
+  }
+
+  .intro-container p {
+    font-size: 0.9rem;
+  }
 }

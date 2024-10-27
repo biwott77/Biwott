@@ -1,6 +1,14 @@
+.home {
+  width: 100%;
+  max-width: 1200px; /* Should match the app-container max-width */
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 .contact {
     position: relative; /* Changed from fixed to relative */
-  padding-top: 120px; /* Add space for the Navbar */
+    padding-top: 120px; /* Add space for the Navbar */
     top: 0;
     left: 0;
     right: 0;

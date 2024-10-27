@@ -1,10 +1,26 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center the content */
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   background-color: #1a2a3a;
   color: white;
+  width: 100vw; /* Full viewport width */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Should match the app-container max-width */
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .navbar-left {

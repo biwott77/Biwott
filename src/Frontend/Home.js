@@ -50,11 +50,10 @@ const HomePage = () => {
   });
 
   return (
-    <div className="home">
-      <div className="marquee-container">
-        <h2 className="marquee-text">Thank you for visiting my website.</h2>
+    <div className="home" style={{backgroundColor: 'red'}}>
+      <div className="animated-thank-you">
+        <p>Thank you for visiting my site!</p>
       </div>
-
       <div className="home-content">
         <div className="intro-container">
           <h2>✅ Hi 👋, and welcome to my Portfolio!</h2>
@@ -73,11 +72,16 @@ const HomePage = () => {
           </h2>
         </div>
 
-
         <div className="animated-images-container">
           <div className="animated-images">
             <div className="image-container">
-              <img src={atbash} alt="Animation 1" />
+              <img 
+                src={atbash} 
+                alt="Animation 1" 
+                loading="lazy"
+                srcSet={`${atbash} 300w, ${atbash} 600w`}
+                sizes="(max-width: 480px) 100vw, (max-width: 768px) 45vw, 30vw"
+              />
             </div>
             <div className="image-container">
               <img src={wwww} alt="Animation 2" />
@@ -87,6 +91,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+
         <div className="skills-certifications">
           <div
             className="skill-cert-container"
@@ -160,8 +165,6 @@ const HomePage = () => {
             </ul>
           </div>
         </div>
-
-
       </div>
     </div>
   );

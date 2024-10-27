@@ -81,3 +81,242 @@
 .signup-button:hover {
   background-color: #ffffff;
 }
+
+
+
+
+
+
+
+
+
+/* Media Queries for different screen sizes */
+@media screen and (max-width: 1024px) {
+  .navbar {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .navbar-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .navbar-links a {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 0.6rem 1rem;
+  }
+
+  .navbar-image {
+    width: 50px;
+    height: 50px;
+    margin-left: -10px;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .navbar-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Adjust based on your navbar height */
+    left: 0;
+    width: 100%;
+    background-color: #1a2a3a;
+    padding: 1rem 0;
+    z-index: 1000;
+  }
+
+  .navbar-links.active li {
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .navbar-image {
+    width: 40px;
+    height: 40px;
+    margin-left: -5px;
+  }
+
+  .navbar-links a {
+    font-size: 0.8rem;
+  }
+
+  .navbar-right {
+    gap: 0.5rem;
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 320px) {
+  .navbar {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .navbar-image {
+    width: 35px;
+    height: 35px;
+    margin-left: 0;
+  }
+
+  .navbar-links.active {
+    top: 60px;
+  }
+}
+
+/* Hamburger menu styles */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.hamburger-icon {
+  width: 25px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+/* Animation for hamburger menu */
+.hamburger-icon.open span:first-child {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.open span:last-child {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Transition effects */
+.navbar, .navbar-image, .navbar-links a {
+  transition: all 0.3s ease;
+}
+
+
+@media screen and (max-width: 768px) {
+  .navbar-right {
+    display: none;
+  }
+
+  .navbar-right.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: auto;
+    left: 0;
+    width: 100%;
+    background-color: #1a2a3a;
+    padding: 1rem 0;
+    z-index: 1000;
+  }
+}
+
+/* Toggle Icon Styles */
+.toggle-icon {
+  display: none; /* Hidden by default */
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1000;
+  margin-right: 10px;
+}
+
+.toggle-icon span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Animation for toggle icon when active */
+.toggle-icon.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle-icon.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.toggle-icon.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Media Query for small screens */
+@media screen and (max-width: 768px) {
+  .toggle-icon {
+    display: flex; /* Show on small screens */
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    background-color: #1a2a3a;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .navbar-links.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar-links li {
+    margin: 15px 0;
+  }
+
+  /* Add hover effect for toggle icon */
+  .toggle-icon:hover span {
+    background-color: #61dafb;
+  }
+}
+
+/* Additional responsive adjustments */
+@media screen and (max-width: 480px) {
+  .toggle-icon {
+    padding: 8px;
+  }
+
+  .toggle-icon span {
+    width: 22px;
+    height: 2px;
+    margin: 4px 0;
+  }
+}

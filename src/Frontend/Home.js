@@ -7,7 +7,7 @@ import final from './final.png';
 
 const HomePage = () => {
   const [text] = useTypewriter({
-    words: ['Developer', 'Designer', 'Creator', 'Cybersecurity Specialist'],
+    words: ['Developer', 'Designer', 'Creator', 'Surgeon', 'Specialist'],
     loop: true,
     typeSpeed: 70,
     deleteSpeed: 50,
@@ -19,7 +19,7 @@ const HomePage = () => {
   const [certHover, setCertHover] = useState(false);
 
   const [webDevTyping] = useTypewriter({
-    words: ['HTML', 'CSS', 'JavaScript', 'MySQL', 'Django', 'React'],
+    words: ['HTML', 'CSS', 'JavaScript', 'MySQL', 'Swift', 'Kotlin', 'Assembly', 'React'],
     loop: true,
     typeSpeed: 70,
     deleteSpeed: 50,
@@ -27,7 +27,7 @@ const HomePage = () => {
   });
 
   const [cyberSecTyping] = useTypewriter({
-    words: ['Penetration Testing', 'Android Security', 'Cryptography', 'Network Security', 'Vulnerability Assessment'],
+    words: ["Traininf", 'Vendor-Training', 'In-house'],
     loop: true,
     typeSpeed: 70,
     deleteSpeed: 50,
@@ -35,7 +35,7 @@ const HomePage = () => {
   });
 
   const [certTyping] = useTypewriter({
-    words: ['CISSP', 'CCNP', 'CompTIA Security+', 'Cisco Umbrella'],
+    words: ['Umbrella', 'Moi'],
     loop: true,
     typeSpeed: 70,
     deleteSpeed: 50,
@@ -130,15 +130,15 @@ const HomePage = () => {
                   <Cursor cursorColor='white' />
                 </>
               ) : (
-                'Cybersecurity'
+                'Oranges'
               )}
             </h3>
             <ul>
-              <li>Penetration Testing</li>
-              <li>Android Security</li>
-              <li>Cryptography</li>
-              <li>Network Security</li>
-              <li>Vulnerability Assessment</li>
+              <li>Pineapple</li>
+              <li>Orange</li>
+              <li>Mang0</li>
+              <li>Banana</li>
+              <li>Apple</li>
             </ul>
           </div>
 
@@ -158,10 +158,10 @@ const HomePage = () => {
               )}
             </h3>
             <ul>
-              <li>CISSP (Certified Information Systems Security Professional)</li>
-              <li>CCNP (Cisco Certified Network Professional)</li>
-              <li>CompTIA Security+</li>
-              <li>Cisco Umbrella</li>
+              <li>Mobile Development</li>
+              <li>Software Development</li>
+              <li>Crypto</li>
+              <li>Bitcoin</li>
             </ul>
           </div>
         </div>

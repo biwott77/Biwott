@@ -1,61 +1,100 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import axios from 'axios';
-import '../styles/SignUp.css';
+import '../styles/Auth.css';
 
-const Signup = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
-    const [successMsg, setSuccessMsg] = useState('');
+const SignUp = ({ onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrorMsg('');
-        setSuccessMsg('');
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-        try {
-            const response = await axios.post('http://localhost:9000/signup', {
-                username,
-                email,
-                password,
-                confirm_password: confirmPassword,
-            });
-            if (response.status === 200) {
-                setSuccessMsg('Registration successful! Please log in.');
-            }
-        } catch (error) {
-            setErrorMsg(error.response.data || 'An error occurred during signup.');
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8080/api/signup', formData);
+      console.log('Signup successful:', response.data);
+      // Handle successful signup (e.g., redirect to login)
+      onClose();
+    } catch (error) {
+      setError('Email already exists');
+      console.error('Error signing up:', error.response.data);
+    }
+  };
 
-    return (
-        <div>
-            <h2>Signup</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Confirm Password:</label>
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-                </div>
-                <button type="submit">Sign Up</button>
-            </form>
-            {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
-            {successMsg && <p style={{ color: 'green' }}>{successMsg}</p>}
+  return (
+    <motion.div 
+      className="auth-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div 
+        className="auth-modal"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -50, opacity: 0 }}
+      >
+        <div className="auth-header">
+          <h2>Sign Up</h2>
+          <button className="close-button" onClick={onClose}>X</button>
         </div>
-    );
+
+        {error && <p className="error-message">{error}</p>}
+
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              value={formData.name}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              value={formData.email}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              value={formData.password}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+          
+          <button type="submit" className="auth-submit">
+            Sign Up
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
 };
 
-export default Signup;
+export default SignUp;

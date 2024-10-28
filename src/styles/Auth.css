@@ -1,0 +1,176 @@
+.auth-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100; /* Higher than navbar */
+    padding: 20px;
+  }
+  
+  .auth-modal {
+    background-color: #1a2a3a;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center; /* Center header text */
+  }
+  
+  .auth-header h2 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.5rem;
+    flex-grow: 1; /* Allow h2 to take space between button */
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .close-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .auth-form {
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #61dafb;
+  }
+  
+  .auth-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #61dafb;
+    color: #1a2a3a;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-submit:hover {
+    background-color: #4fa8d3;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 480px) {
+    .auth-modal {
+      max-width: 100%;
+      margin: 10px;
+    }
+  
+    .auth-header {
+      padding: 15px;
+    }
+  
+    .auth-header h2 {
+      font-size: 1.3rem;
+    }
+  
+    .auth-form {
+      padding: 15px;
+    }
+  
+    .form-group {
+      margin-bottom: 15px;
+    }
+  
+    .form-group input {
+      padding: 8px;
+      font-size: 0.9rem;
+    }
+  
+    .auth-submit {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Prevent body scroll when modal is open */
+  body.modal-open {
+    overflow: hidden;
+  }
+  .auth-header {
+    display: flex;
+    justify-content: center; /* Center header content */
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative; /* For button positioning */
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto; /* Pushes the button to the right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .close-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .close-button svg {
+    width: 24px;
+    height: 24px;
+  }
+    

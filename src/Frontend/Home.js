@@ -42,12 +42,37 @@ const HomePage = () => {
     delaySpeed: 1000,
   });
   const [Intro] = useTypewriter({
-    words: ['Where do we start?', 'Let’s Create', 'Let’s Design', 'Let’s Brainstorm', 'Let’s Innovate', 'Let’s Integrate', 'Let’s Elevate', 'Each Other', 'Thank you!'],
+    words: [
+        'Where do we start?',
+        'I,m Kibiwot Moi',
+        'Am I a good fit?',
+        'Let’s Create',
+        'Let’s Design',
+        'Let’s Brainstorm',
+        'Let’s Innovate',
+        'Let’s Integrate',
+        'Let’s Elevate',
+        'Each Other',
+        'Thank you!',
+        'Dream Big',
+        'Code Together',
+        'Crafting Ideas',
+        'Unlock Potential',
+        'Explore Solutions',
+        'Build the Future',
+        'Make It Happen',
+        'Empower Creativity',
+        'Connect & Collaborate',
+        'Design with Purpose',
+        'Think Outside the Box',
+        'Shape Your Vision',
+    ],
     loop: true,
     typeSpeed: 70,
     deleteSpeed: 50,
     delaySpeed: 1000,
-  });
+});
+
 
   
   return (
@@ -57,11 +82,12 @@ const HomePage = () => {
       </div>
       <div className="home-content">
         <div className="intro-container">
+          
+          <h1><span style={{ color: 'yellow', margin: '20px' }}>{Intro}</span></h1>
           <div className='sub'>
-          <h2 className='sub1'>✅ Hi 👋, and welcome to my Portfolio!</h2>
+          <h3 className='sub1'>✅ Hi 👋, and welcome to my Portfolio!</h3>
           <h2>✅ I’m thrilled to have you here. Dive in, explore my work, and let’s connect!</h2>
           </div>
-          <h1><span style={{ color: 'yellow', margin: '20px' }}>{Intro}</span></h1>
           <p>
             With a passion for technology and an eye for creativity, I bring ideas to life through code. Whether it's developing engaging user experiences or building robust applications, I’m dedicated to crafting solutions that make a difference.
           </p>

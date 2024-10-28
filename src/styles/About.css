@@ -1,82 +1,133 @@
-.about {
+.about-container {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f0f4f8;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+  color: #ffffff;
 }
 
-.container {
-  max-width: 800px;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.about-header {
+  text-align: center;
+  margin-bottom: 60px;
 }
 
-h1 {
+.about-header h1 {
   font-size: 2.5rem;
-  color: #2d3748;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 
-h2 {
+.about-header h2 {
   font-size: 1.8rem;
-  color: #4a5568;
-  margin-bottom: 1.5rem;
+  font-weight: normal;
 }
 
 .highlight {
-  color: #3b82f6;
-  font-weight: bold;
+  color: #61dafb;
 }
 
-p {
+.about-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-section {
+  margin-bottom: 60px;
+}
+
+.about-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #61dafb;
+}
+
+.about-section p {
+  line-height: 1.8;
   font-size: 1.1rem;
-  color: #4a5568;
-  line-height: 1.6;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
-.tabs {
-  display: flex;
-  margin-bottom: 1rem;
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
 
-.tabs button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  background-color: #e2e8f0;
-  border: none;
-  border-radius: 5px;
-  margin-right: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.skill-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
 }
 
-.tabs button.active {
-  background-color: #3b82f6;
-  color: white;
+.skill-card:hover {
+  transform: translateY(-5px);
 }
 
-.tab-content {
-  background-color: #f7fafc;
-  padding: 1rem;
-  border-radius: 5px;
+.skill-card h4 {
+  color: #61dafb;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
 }
 
-.skill-list, .interest-list {
-  list-style-type: none;
+.skill-card ul {
+  list-style: none;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
 }
 
-.skill-list li, .interest-list li {
-  background-color: #3b82f6;
-  color: white;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
+.skill-card li {
+  margin: 10px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.skill-card li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #61dafb;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .about-container {
+    padding: 60px 15px;
+  }
+
+  .about-header h1 {
+    font-size: 2rem;
+  }
+
+  .about-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .skill-card {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .about-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .about-section p {
+    font-size: 1rem;
+  }
+
+  .skill-card h4 {
+    font-size: 1.1rem;
+  }
 }

@@ -1,99 +1,79 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import { motion } from 'framer-motion';
 import '../styles/About.css';
 
 const AboutPage = () => {
   const [text] = useTypewriter({
-    words: ['Passionate', 'Innovative', 'Detail-oriented'],
-    loop: 0,
+    words: ['Developer', 'Designer', 'Creator', 'Dev & Design', 'Building Dreams', 'Crafting Code', 'Design Matters', 'Code & Creativity', 'Visual Innovator', 'Function & Form', 'Tech Aesthetic', 'Digital Artisan', 'Code Alchemist'],
+    loop: true,
+    delaySpeed: 2000,
   });
 
-  const [activeTab, setActiveTab] = useState('skills');
-
-  const skills = ['React', 'JavaScript', 'CSS', 'HTML', 'Node.js', 'Python'];
-  const interests = ['Web Development', 'AI', 'Machine Learning', 'UI/UX Design'];
-
   return (
-    <motion.div 
-      className="about"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="container">
-        <motion.h1
-          initial={{ y: -50 }}
-          animate={{ y: 0 }}
-          transition={{ type: 'spring', stiffness: 120 }}
-        >
-          About Me
-        </motion.h1>
+    <div className="about-container">
+      <div className="about-header">
+        <h1>About Me</h1>
         <h2>
           I'm a <span className="highlight">{text}</span>
-          <Cursor cursorColor='#3b82f6' /> developer
+          <Cursor cursorColor="#61dafb" />
         </h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          With a strong background in web development and a passion for creating 
-          user-friendly applications, I strive to deliver high-quality solutions 
-          that meet and exceed client expectations.
-        </motion.p>
+      </div>
 
-        <div className="tabs">
-          <button 
-            className={activeTab === 'skills' ? 'active' : ''} 
-            onClick={() => setActiveTab('skills')}
-          >
-            Skills
-          </button>
-          <button 
-            className={activeTab === 'interests' ? 'active' : ''} 
-            onClick={() => setActiveTab('interests')}
-          >
-            Interests
-          </button>
+      <div className="about-content">
+        <div className="about-section">
+          <h3>Who I Am</h3>
+          <p>
+            I'm a passionate developer who loves creating innovative and user-friendly web applications. 
+            With a strong foundation in modern web technologies, I strive to build solutions that make 
+            a difference.
+          </p>
         </div>
 
-        <motion.div 
-          className="tab-content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          {activeTab === 'skills' ? (
-            <ul className="skill-list">
-              {skills.map((skill, index) => (
-                <motion.li 
-                  key={skill}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  {skill}
-                </motion.li>
-              ))}
-            </ul>
-          ) : (
-            <ul className="interest-list">
-              {interests.map((interest, index) => (
-                <motion.li 
-                  key={interest}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  {interest}
-                </motion.li>
-              ))}
-            </ul>
-          )}
-        </motion.div>
+        <div className="about-section">
+          <h3>What I Do</h3>
+          <div className="skills-grid">
+            <div className="skill-card">
+              <h4>Frontend Development</h4>
+              <ul>
+                <li>HTML5 & CSS3</li>
+                <li>JavaScript (ES6+)</li>
+                <li>React.js</li>
+                <li>Responsive Design</li>
+              </ul>
+            </div>
+
+            <div className="skill-card">
+              <h4>Backend Development</h4>
+              <ul>
+                <li>Node.js</li>
+                <li>Python</li>
+                <li>MySQL</li>
+                <li>RESTful APIs</li>
+              </ul>
+            </div>
+
+            <div className="skill-card">
+              <h4>Tools & Technologies</h4>
+              <ul>
+                <li>Git & GitHub</li>
+                <li>VS Code</li>
+                <li>Command Line</li>
+                <li>Webpack</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="about-section">
+          <h3>My Journey</h3>
+          <p>
+            Starting my journey in web development, I've worked on various projects that have helped me 
+            develop a strong understanding of both frontend and backend technologies. I'm constantly 
+            learning and exploring new technologies to stay up-to-date with the latest industry trends.
+          </p>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

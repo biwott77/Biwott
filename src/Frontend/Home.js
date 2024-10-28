@@ -27,7 +27,7 @@ const HomePage = () => {
   });
 
   const [cyberSecTyping] = useTypewriter({
-    words: ["Traininf", 'Vendor-Training', 'In-house'],
+    words: ["Training", 'Vendor-Training', 'In-house-Training', 'Code-review'],
     loop: true,
     typeSpeed: 70,
     deleteSpeed: 50,
@@ -44,7 +44,7 @@ const HomePage = () => {
   const [Intro] = useTypewriter({
     words: [
         'Where do we start?',
-        'I,m Kibiwot Moi',
+        "I'm Kibiwot Moi",
         'Am I a good fit?',
         'Let’s Create',
         'Let’s Design',

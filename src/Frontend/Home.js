@@ -49,15 +49,18 @@ const HomePage = () => {
     delaySpeed: 1000,
   });
 
+  
   return (
-    <div className="home" style={{backgroundColor: 'red'}}>
+    <div className="home">
       <div className="animated-thank-you">
         <p>Thank you for visiting my site!</p>
       </div>
       <div className="home-content">
         <div className="intro-container">
-          <h2>✅ Hi 👋, and welcome to my Portfolio!</h2>
+          <div className='sub'>
+          <h2 className='sub1'>✅ Hi 👋, and welcome to my Portfolio!</h2>
           <h2>✅ I’m thrilled to have you here. Dive in, explore my work, and let’s connect!</h2>
+          </div>
           <h1><span style={{ color: 'yellow', margin: '20px' }}>{Intro}</span></h1>
           <p>
             With a passion for technology and an eye for creativity, I bring ideas to life through code. Whether it's developing engaging user experiences or building robust applications, I’m dedicated to crafting solutions that make a difference.
@@ -98,7 +101,7 @@ const HomePage = () => {
             onMouseEnter={() => setWebDevHover(true)}
             onMouseLeave={() => setWebDevHover(false)}
           >
-            <h3>
+            <h3 className='headers'>
               {webDevHover ? (
                 <>
                   {webDevTyping}
@@ -123,7 +126,7 @@ const HomePage = () => {
             onMouseEnter={() => setCyberSecHover(true)}
             onMouseLeave={() => setCyberSecHover(false)}
           >
-            <h3>
+            <h3 className='headers'>
               {cyberSecHover ? (
                 <>
                   {cyberSecTyping}
@@ -147,7 +150,7 @@ const HomePage = () => {
             onMouseEnter={() => setCertHover(true)}
             onMouseLeave={() => setCertHover(false)}
           >
-            <h3>
+            <h3 className='headers'>
               {certHover ? (
                 <>
                   {certTyping}

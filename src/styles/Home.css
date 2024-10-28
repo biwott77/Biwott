@@ -3,8 +3,9 @@
   min-height: 100vh;
   /* margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%); */
-  padding: 80px 0 30px; /* Adjust top padding to account for navbar */
+  padding: 80px 0 30px; 
   background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+  background-color: rgb(0, 0, 46);
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -14,7 +15,7 @@
 
 .home-content {
   width: 100%;
-  max-width: 1200px; /* Match this with your app container max-width */
+  max-width: 1200px;
   padding: 0 20px;
   box-sizing: border-box;
   flex-grow: 1;
@@ -23,7 +24,6 @@
 .home h1 {
   font-size: 3.5rem;
   margin-bottom: 1rem;
-  /* text-shadow: 2px 2px 4px rgba(0,0,0,0.5); */
 }
 
 .home h2 {
@@ -38,7 +38,6 @@
   max-width: 600px;
   line-height: 1.6;
 }
-
 .cta-button {
   background-color: #61dafb;
   color: #1a1a1a;
@@ -61,7 +60,7 @@
 
 .skills-certifications {
   width: 100%;
-  max-width: 1200px; /* Match this with your app container max-width */
+  max-width: 1200px;
   padding: 0 20px;
   box-sizing: border-box;
   display: flex;
@@ -71,7 +70,7 @@
 }
 
 .skill-cert-container {
-  background-color: #1a2a3a;
+  background-color: rgb(0, 0, 46);
   border-radius: 8px;
   padding: 1.5rem;
   text-align: left;
@@ -89,7 +88,7 @@
   margin-bottom: 1rem;
   color: #61dafb;
   text-align: center;
-  height: 2em; /* Adjust this value as needed */
+  height: 2em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,25 +108,25 @@
 }
 
 .skill-cert-container li::before {
-  content: '\2713'; /* Unicode character for checkmark */
+  content: '\2713';
   position: absolute;
   left: 0;
-  color: #61dafb; /* Color of the checkmark */
+  color: #61dafb; 
   font-weight: bold;
 }
 
 .animated-images-container {
-  background-color: #1a2a3a; /* Same background color as skill-cert-container */
+  background-color: rgb(0, 0 ,46); 
   border-radius: 8px;
   padding: 1.5rem;
-  margin-top: 2rem; /* Same margin as skills-certifications */
-  overflow: hidden; /* Ensure images don't overflow during animation */
+  margin-top: 2rem;
+  overflow: hidden;
   margin: 40px;
 }
 
 .animated-images {
   position: relative;
-  height: 120px; /* Set a fixed height for the container */
+  height: 120px; 
 }
 
 .image-container {
@@ -146,14 +145,13 @@
 
 @keyframes moveLeftToRight {
   0% {
-    left: -100px; /* Start off-screen to the left */
-  }
+    left: -100px;
+  } 
   100% {
-    left: 100%; /* End off-screen to the right */
+    left: 100%; 
   }
 }
 
-/* Stagger the animation for each image */
 .image-container:nth-child(1) {
   animation-delay: 0s;
 }
@@ -183,11 +181,9 @@
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
 }
-/* ... other styles ... */
 
 .intro-container {
-  background-color: #1a2a3a; /* Same background color as other containers */
-  border-radius: 8px;
+  background-color: #1a2a3a;
   padding: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
@@ -203,7 +199,6 @@
 
 .cta-button {
   display: inline-block;
-  /* ... existing cta-button styles ... */
 }
 
 .cert-list{
@@ -354,3 +349,19 @@
     font-size: 0.9rem;
   }
 }
+
+.intro-container{
+  background-color: rgb(0, 0, 46);
+}
+.sub{
+  display: block;
+  position: relative;
+  left: 0;
+}
+.sub1{
+  position: relative;
+  left: 0;
+}
+/* .headers{
+  position: absolute;
+} */

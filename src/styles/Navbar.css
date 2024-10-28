@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+
 }
 
 .logo-link {
@@ -32,7 +33,7 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  margin-left: -20px;
+  margin-left: 30px;
   transition: transform 0.3s ease;
 }
 
@@ -179,7 +180,7 @@
   }
 
   .nav-links li {
-    margin-left: 2rem; /* Add some spacing for horizontal layout */
+    margin-left: 2rem; 
   }
 
   .auth-buttons {
@@ -195,7 +196,7 @@
   .navbar-image {
     width: 40px;
     height: 40px;
-    margin-left: -10px;
+    margin-left: 20px;
   }
 
   .nav-links li a {

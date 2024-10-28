@@ -34,7 +34,7 @@ const Navbar = () => {
         </div>
 
         {/* Auth Buttons */}
-        <div className={`auth-buttons ${isOpen ? 'active' : ''}`}>
+        <div className={`auth-buttons ${isOpen ? 'active' : ''}`} style={{marginRight: '50px'}}>
           <Link to="/login" className="login-btn">Login</Link>
           <Link to="/signup" className="signup-btn">Sign Up</Link>
         </div>

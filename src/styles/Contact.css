@@ -13,6 +13,7 @@
   align-items: center;
   padding: 2rem;
   background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+  margin-top: 60px; /* Added margin to account for navbar height */
 }
 
 .contact-container {
@@ -34,7 +35,7 @@
 .contact-content {
   display: flex;
   gap: 2rem;
-  width: 700px;
+  flex-wrap: wrap; /* Allow content to wrap on smaller screens */
 }
 
 .contact-info {
@@ -216,9 +217,11 @@
 .submit-btn {
   transition: all 0.3s ease;
 }
-.ww{
+
+.ww {
   width: 100px;
 }
+
 .title-container {
   height: 60px; /* Fixed height to prevent layout shifts */
   display: flex;

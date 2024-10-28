@@ -26,15 +26,15 @@ const ContactPage = () => {
             <h2>Contact Information</h2>
             <div className="info-item">
               <i className="fas fa-envelope"></i>
-              <p style={{color: 'darkmagenta'}}>Email: your.email@example.com</p>
+              <p style={{color: 'darkmagenta'}}>Email: umbrella@example.com</p>
             </div>
             <div className="info-item">
               <i className="fas fa-phone"></i>
-              <p style={{color: 'darkmagenta'}}>Phone: +1 234 567 890</p>
+              <p style={{color: 'darkmagenta'}}>Phone: +254 711 815 731</p>
             </div>
             <div className="info-item">
               <i className="fas fa-map-marker-alt"></i>
-              <p style={{color: 'darkmagenta'}}>Location: Your Location</p>
+              <p style={{color: 'darkmagenta'}}>Location: Nairobi, Kenya</p>
             </div>
           </div>
 

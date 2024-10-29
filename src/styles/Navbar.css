@@ -50,6 +50,7 @@
   top: 60px; /* Adjust according to your navbar height */
   background-color: #1a2a3a;
   display: none; /* Hidden by default */
+
 }
 
 .nav-links.active {
@@ -60,15 +61,15 @@
   color: white;
   text-decoration: none;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
 .nav-links li a:hover {
-  color: rgb(0, 0, 46);
-  background-color: rgba(241, 227, 20, 0.938);
+  color: wheat;
+  background-color: darkmagenta;
 }
 
 /* Auth Buttons Styles */
@@ -90,6 +91,7 @@
 .login-btn {
   background-color: transparent;
   border: 1px solid #61dafb;
+  color: aqua;
 }
 
 .login-btn:hover {
@@ -215,6 +217,7 @@
 
   .nav-links li a:hover {
     background-color: darkmagenta;
+    margin-bottom: 10px;
   }
 
   .login-btn, .signup-btn {

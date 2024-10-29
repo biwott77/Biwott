@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Navbar from './Frontend/Navbar';
-import Login from './Frontend/Login';
-import SignUp from './Frontend/SignUp';
-import HomePage from "./Frontend/Home";
-import AboutPage from "./Frontend/About";
-import ProjectsPage from "./Frontend/Projects";
-import ContactPage from "./Frontend/Contact";
-import Footer from "./Frontend/Footer";
+import Navbar from './api/Navbar';
+import Login from './api/Login';
+import SignUp from './api/SignUp';
+import HomePage from "./api/Home";
+import AboutPage from "./api/About";
+import ProjectsPage from "./api/Projects";
+import ContactPage from "./api/Contact";
+import Footer from "./api/Footer";
 import './styles/App.css';
 
 function App() {

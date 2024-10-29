@@ -69,7 +69,7 @@ function App() {
           path="/signup"
           element={
             <AnimatePresence mode="wait">
-              {isSignupOpen && <SignUp key="signup" onClose={handleClose} />}
+              {isSignupOpen && <SignUp key="signup" onClose={handleClose}  onSwitchToLogin={handleLoginOpen}/>}
             </AnimatePresence>
           }
         />

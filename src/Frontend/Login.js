@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Login.css';
+import { Link } from 'react-router-dom';
 
 const Login = ({ onClose, onSwitchToSignup }) => {
     useEffect(() => {
@@ -122,7 +123,7 @@ const Login = ({ onClose, onSwitchToSignup }) => {
                                 className="signup-link"
                                 onClick={onSwitchToSignup}
                             >
-                                Sign up
+                                <Link to="/signup" style={{color: 'green'}}>Sign up</Link>
                             </button>
                         </p>
                     </div>

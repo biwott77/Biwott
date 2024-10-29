@@ -1,179 +1,175 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f4f4f4;
 }
 
 .form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
 .form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-container label {
-    display: block;
-    margin-bottom: 8px;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .form-container input[type="text"],
 .form-container input[type="email"],
 .form-container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .password-wrapper {
-    position: relative;
+  position: relative;
 }
 
 .password-wrapper input {
-    width: calc(100% - 30px);
+  width: calc(100% - 30px);
 }
 
 .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    user-select: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
 }
 
 .form-container input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #5cb85c;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .form-container input[type="submit"]:hover {
-    background-color: #4cae4c;
+  background-color: #4cae4c;
 }
 
 .login-link {
-    text-align: center;
-    margin-top: 15px;
+  text-align: center;
+  margin-top: 15px;
 }
 
 .login-link a {
-    color: #5cb85c;
-    text-decoration: none;
+  color: #5cb85c;
+  text-decoration: none;
 }
 
 .error-msg {
-    color: red;
-    text-align: center;
+  color: red;
+  text-align: center;
 }
 
 .success-msg {
-    color: green;
-    text-align: center;
+  color: green;
+  text-align: center;
 }
 
 .fas {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-}.signup-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .signup-container h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-  
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group label {
-    margin-bottom: 0.5rem;
-    color: #666;
-  }
-  
-  .form-group input {
-    padding: 0.8rem;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-group input:focus {
-    outline: none;
-    border-color: #61dafb;
-  }
-  
-  .signup-btn {
-    padding: 0.8rem;
-    background-color: #61dafb;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .signup-btn:hover {
-    background-color: #4fa8d3;
-  }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 480px) {
-    .signup-container {
-      padding: 1rem;
-      width: 90%;
-    }
-  }
-  /* Signup specific styles can go here if needed */
-
-.login-form-group input {
-  /* Existing styles apply; no need to redefine */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
 }
 
-.password-input-wrapper input {
-  padding-right: 45px; /* Make room for the eye icon */
+.signup-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.password-toggle {
-  /* Reuse existing styles */
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
-/* Additional styles for better layout or responsiveness can be added here */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.form-group input {
+  padding: 0.8rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #61dafb;
+}
+
+.signup-btn {
+  padding: 0.8rem;
+  background-color: #61dafb;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+  background-color: #4fa8d3;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  .signup-container {
+    padding: 1rem;
+    width: 90%;
+  }
+}
+.signup-link {
+  background: none;
+  border: none;
+  color: #61dafb;
+  font-weight: bolder;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.3s ease;
+}

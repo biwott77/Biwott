@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Login.css';
+import { Link } from 'react-router-dom';
 
-const Signup = ({ onClose }) => {
+const Signup = ({ onClose, onSwitchToLogin}) => {
     useEffect(() => {
         document.body.classList.add('modal-open');
         return () => {
@@ -127,6 +128,18 @@ const Signup = ({ onClose }) => {
                     <button type="submit" className="login-submit">
                         Sign Up
                     </button>
+                    <div className="login-footer">
+                        <p>
+                            Already have an account?{' '}
+                            <button 
+                                type="button" 
+                                className="signup-link"
+                                onClick={onSwitchToLogin}
+                            >
+                                <Link to="/login" style={{color: 'green', fontSize: '13x'}}>Sign In</Link>
+                            </button>
+                        </p>
+                    </div>
                 </form>
             </motion.div>
         </motion.div>

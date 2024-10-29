@@ -26,7 +26,7 @@ const HomePage = () => {
     // Verify token
     const verifyToken = async () => {
       try {
-        await axios.get('http://localhost:8080/protected', {
+        await axios.get('https://api-olive-rho-65.vercel.app/api/protected', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

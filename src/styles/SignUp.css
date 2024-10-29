@@ -163,9 +163,6 @@ body {
     padding: 1rem;
     width: 90%;
   }
-  .signup-close-button{
-    margin-left: 10px;
-  }
 }
 .signup-link {
   background: none;
@@ -175,4 +172,7 @@ body {
   cursor: pointer;
   padding: 0 4px;
   transition: color 0.3s ease;
+}
+.signup-close-button{
+  margin-left: 10px;
 }

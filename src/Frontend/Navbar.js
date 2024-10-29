@@ -15,7 +15,7 @@ const Navbar = ({ onLoginClick, onSignupClick }) => {
       <div className="navbar-container">
         <div className="navbar-left">
           <Link to="/" className="logo-link">
-            <img src={moik} alt="Moik" className="navbar-image" />
+            <img src={moik} alt="KIBIWOT" className="navbar-image" />
           </Link>
           
           <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
@@ -37,7 +37,7 @@ const Navbar = ({ onLoginClick, onSignupClick }) => {
         <div className={`auth-buttons ${isOpen ? 'active' : ''}`} style={{marginRight: '50px'}}>
           {/* Change Login Link to a button that triggers onLoginClick */}
           <button className="login-btn" onClick={onLoginClick}>
-            <Link to="/login">Login</Link>
+            <Link to="/login" style={{color: 'blue'}}>Login</Link>
           </button>
           <Link to="/signup" className="signup-btn" onClick={onSignupClick}>Sign Up</Link>
         </div>

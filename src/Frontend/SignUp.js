@@ -136,7 +136,7 @@ const Signup = ({ onClose, onSwitchToLogin}) => {
                                 className="signup-link"
                                 onClick={onSwitchToLogin}
                             >
-                                <Link to="/login" style={{fontSize: '13x'}}>Sign In</Link>
+                                <Link to="/login" style={{color: 'aqua', fontSize: '13x'}}>Sign In</Link>
                             </button>
                         </p>
                     </div>

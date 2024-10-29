@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 import moik from './moik.jpg';
 
-const Navbar = () => {
+const Navbar = ({ onLoginClick, onSignupClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -36,10 +36,10 @@ const Navbar = () => {
         {/* Auth Buttons */}
         <div className={`auth-buttons ${isOpen ? 'active' : ''}`} style={{marginRight: '50px'}}>
           {/* Change Login Link to a button that triggers onLoginClick */}
-          <button className="login-btn">
-            Login
+          <button className="login-btn" onClick={onLoginClick}>
+            <Link to="/login">Login</Link>
           </button>
-          <Link to="/signup" className="signup-btn">Sign Up</Link>
+          <Link to="/signup" className="signup-btn" onClick={onSignupClick}>Sign Up</Link>
         </div>
       </div>
     </nav>

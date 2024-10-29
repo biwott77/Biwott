@@ -13,21 +13,25 @@ import './styles/App.css';
 
 function App() {
   const location = useLocation();
-  const [showLogin, setShowLogin] = useState(false);
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isSignupOpen, setSignupOpen] = useState(false);
 
-  const handleCloseLogin = () => {
-    console.log('Closing login modal'); // Debug log
-    setShowLogin(false);
+  const handleLoginOpen = () => {
+    setLoginOpen(true);
   };
 
-  const handleOpenLogin = () => {
-    console.log('Opening login modal'); // Debug log
-    setShowLogin(true);
+  const handleSignupOpen = () => {
+    setSignupOpen(true);
+  };
+
+  const handleClose = () => {
+    setLoginOpen(false);
+    setSignupOpen(false);
   };
 
   return (
     <>
-      <Navbar onLoginClick={handleOpenLogin} />
+      <Navbar onLoginClick={handleLoginOpen} onSignupClick={handleSignupOpen} />
       <Routes location={location}>
         <Route
           path="/"
@@ -57,7 +61,7 @@ function App() {
           path="/login"
           element={
             <AnimatePresence mode="wait">
-              {showLogin && <Login key="login" onClose={handleCloseLogin} />}
+              {isLoginOpen && <Login key="login" onClose={handleClose} onSwitchToSignup={handleSignupOpen} />}
             </AnimatePresence>
           }
         />
@@ -65,7 +69,7 @@ function App() {
           path="/signup"
           element={
             <AnimatePresence mode="wait">
-              <SignUp key="signup" />
+              {isSignupOpen && <SignUp key="signup" onClose={handleClose} />}
             </AnimatePresence>
           }
         />

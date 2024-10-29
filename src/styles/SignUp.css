@@ -162,4 +162,18 @@ body {
       width: 90%;
     }
   }
-  
+  /* Signup specific styles can go here if needed */
+
+.login-form-group input {
+  /* Existing styles apply; no need to redefine */
+}
+
+.password-input-wrapper input {
+  padding-right: 45px; /* Make room for the eye icon */
+}
+
+.password-toggle {
+  /* Reuse existing styles */
+}
+
+/* Additional styles for better layout or responsiveness can be added here */

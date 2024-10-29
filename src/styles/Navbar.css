@@ -89,7 +89,6 @@
 
 .login-btn {
   background-color: transparent;
-  color: #61dafb;
   border: 1px solid #61dafb;
 }
 
@@ -135,19 +134,19 @@
   }
 
   .nav-links {
-    top: 60px; /* Adjust the vertical position as needed */
+    top: 60px; 
   }
 
   .auth-buttons {
-    display: none; /* Hide on small screens */
+    display: none; 
   }
 
   .auth-buttons.active {
-    display: flex; /* Show when active */
+    display: flex; 
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    flex-direction: column; /* Stack vertically on mobile */
+    flex-direction: column; 
     background-color: #1a2a3a;
     padding: 1rem;
     border-radius: 4px;
@@ -166,9 +165,9 @@
     transform: rotate(-45deg) translate(6px, -6px);
   }
 
-  /* Make nav links stack vertically on mobile */
+  
   .nav-links {
-    flex-direction: column; /* Stack vertically */
+    flex-direction: column;
     width: 300px; 
   }
 

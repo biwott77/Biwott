@@ -173,3 +173,6 @@ body {
   padding: 0 4px;
   transition: color 0.3s ease;
 }
+.signup-close-button{
+  margin-left: 10px;
+}

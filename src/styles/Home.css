@@ -365,3 +365,28 @@
 /* .headers{
   position: absolute;
 } */
+.animated-text {
+  font-size: 24px; /* Adjust font size as needed */
+  font-weight: bold;
+  color: #003366; /* Dark blue color */
+  position: relative;
+  overflow: hidden;
+  height: 1.2em; /* Adjust based on font size */
+}
+
+.animated-text::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  animation: rotate 0.5s ease-in-out forwards;
+}
+
+@keyframes rotate {
+  0% {
+      transform: translateY(0);
+  }
+  100% {
+      transform: translateY(-100%);
+  }
+}

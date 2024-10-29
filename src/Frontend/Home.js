@@ -41,6 +41,7 @@ const HomePage = () => {
     deleteSpeed: 50,
     delaySpeed: 1000,
   });
+  
   const [Intro] = useTypewriter({
     words: [
         'Where do we start?',

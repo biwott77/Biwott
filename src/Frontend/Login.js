@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const API_URL = 'https://api-olive-rho-65.vercel.app';
 
 const Login = ({ onClose, onSwitchToSignup }) => {
+    const navigate = useNavigate();
+
     useEffect(() => {
         document.body.classList.add('modal-open');
         return () => {
@@ -12,15 +17,42 @@ const Login = ({ onClose, onSwitchToSignup }) => {
     }, []);
 
     const [formData, setFormData] = useState({
-        username: '',
+        email: '',
         password: ''
     });
     const [showPassword, setShowPassword] = useState(false);
-    const [rememberMe, setRememberMe] = useState(false);
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
-    const handleForgotPassword = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Forgot password clicked');
+        setError('');
+        setSuccessMessage('');
+
+        try {
+            const response = await axios.post(`${API_URL}/api/login`, {
+                email: formData.email,
+                password: formData.password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.status === 200) {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                
+                setSuccessMessage('Login successful! Redirecting to homepage...');
+                
+                setTimeout(() => {
+                    onClose(); // Close the modal
+                    navigate('/homepage'); // Redirect to homepage
+                }, 2000);
+            }
+        } catch (err) {
+            setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
+        }
     };
 
     return (
@@ -29,40 +61,39 @@ const Login = ({ onClose, onSwitchToSignup }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose} // Close modal when clicking outside
+            onClick={onClose}
         >
+            {error && <div className="error-msg">{error}</div>}
+            {successMessage && <div className="success-msg">{successMessage}</div>}
+            
             <motion.div 
                 className="login-modal"
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -50, opacity: 0 }}
-                onClick={e => e.stopPropagation()} // Prevent closing when clicking inside
+                onClick={e => e.stopPropagation()}
             >
                 <div className="login-header">
                     <h2>Welcome Back</h2>
-                    <p className="login-subtitle">Please enter your details</p>
+                    <p className="login-subtitle">Please login to your account</p>
                     <button 
                         className="login-close-button"
-                        onClick={onClose} // Close modal when "X" is clicked
+                        onClick={onClose}
                         aria-label="Close"
                     >
                         X
                     </button>
                 </div>
 
-                <form className="login-form">
+                <form className="login-form" onSubmit={handleSubmit}>
                     <div className="login-form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="email">Email</label>
                         <input 
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={formData.username}
-                            onChange={(e) => setFormData({
-                                ...formData,
-                                username: e.target.value
-                            })}
-                            placeholder="Enter your username"
+                            type="email"
+                            id="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            placeholder="Enter your email"
                             required
                         />
                     </div>
@@ -73,12 +104,8 @@ const Login = ({ onClose, onSwitchToSignup }) => {
                             <input 
                                 type={showPassword ? "text" : "password"}
                                 id="password"
-                                name="password"
                                 value={formData.password}
-                                onChange={(e) => setFormData({
-                                    ...formData,
-                                    password: e.target.value
-                                })}
+                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                 placeholder="Enter your password"
                                 required
                             />
@@ -88,31 +115,13 @@ const Login = ({ onClose, onSwitchToSignup }) => {
                                 onClick={() => setShowPassword(!showPassword)}
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
-                                {showPassword ? '/' : '.'}
+                                {showPassword ? '🙈' : '👁️'}
                             </button>
                         </div>
                     </div>
 
-                    <div className="login-options">
-                        <label className="remember-me">
-                            <input 
-                                type="checkbox"
-                                checked={rememberMe}
-                                onChange={(e) => setRememberMe(e.target.checked)}
-                            />
-                            <span>Remember me</span>
-                        </label>
-                        <button 
-                            type="button" 
-                            className="forgot-password"
-                            onClick={handleForgotPassword}
-                        >
-                            Forgot password?
-                        </button>
-                    </div>
-
                     <button type="submit" className="login-submit">
-                        Sign in
+                        Login
                     </button>
 
                     <div className="login-footer">
@@ -123,7 +132,7 @@ const Login = ({ onClose, onSwitchToSignup }) => {
                                 className="signup-link"
                                 onClick={onSwitchToSignup}
                             >
-                                <Link to="/signup" style={{color: 'aqua', fontSize: '13x'}}>Sign up</Link>
+                                <Link to="/signup" style={{ color: 'aqua', fontSize: '13px' }}>Sign Up</Link>
                             </button>
                         </p>
                     </div>

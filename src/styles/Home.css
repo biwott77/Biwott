@@ -390,3 +390,49 @@
       transform: translateY(-100%);
   }
 }
+
+.home-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+}
+
+.home-nav h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.logout-button {
+    padding: 8px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+}
+
+/* Adjust existing home class to account for nav bar */
+.home {
+    padding-top: 0; /* Remove any existing top padding */
+}
+
+/* Ensure content scrolls under sticky nav */
+.home-content {
+    position: relative;
+    z-index: 1;
+}

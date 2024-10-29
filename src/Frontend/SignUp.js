@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import '../styles/Login.css';
-import { Link } from 'react-router-dom';
+import '../styles/SignUp.css';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Signup = ({ onClose, onSwitchToLogin}) => {
+const API_URL = 'https://api-olive-rho-65.vercel.app';
+
+const Signup = ({ onClose, onSwitchToLogin }) => {
+    const navigate = useNavigate();
+
     useEffect(() => {
         document.body.classList.add('modal-open');
         return () => {
@@ -18,11 +23,56 @@ const Signup = ({ onClose, onSwitchToLogin}) => {
         passwordConfirm: ''
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle signup logic here
-        console.log(formData);
+        setError('');
+        setSuccessMessage('');
+
+        // Validate password match
+        if (formData.password !== formData.passwordConfirm) {
+            setError("Passwords don't match");
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${API_URL}/api/signup`, {
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
+                passwordConfirm: formData.passwordConfirm
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.status === 201) {
+                setSuccessMessage('Registration successful! Redirecting to login...');
+                
+                // Clear form
+                setFormData({
+                    username: '',
+                    email: '',
+                    password: '',
+                    passwordConfirm: ''
+                });
+
+                // Wait 2 seconds then redirect
+                setTimeout(() => {
+                    if (onSwitchToLogin) {
+                        onSwitchToLogin(); // If using modal switching
+                    } else {
+                        navigate('/login'); // If using route navigation
+                    }
+                }, 2000);
+            }
+        } catch (err) {
+            setError(err.response?.data?.error || 'Registration failed. Please try again.');
+            setTimeout(() => setError(''), 5000); // Clear error after 5 seconds
+        }
     };
 
     return (
@@ -33,6 +83,9 @@ const Signup = ({ onClose, onSwitchToLogin}) => {
             exit={{ opacity: 0 }}
             onClick={onClose}
         >
+            {error && <div className="error-msg">{error}</div>}
+            {successMessage && <div className="success-msg">{successMessage}</div>}
+
             <motion.div 
                 className="login-modal"
                 initial={{ y: -50, opacity: 0 }}
@@ -97,7 +150,7 @@ const Signup = ({ onClose, onSwitchToLogin}) => {
                                 onClick={() => setShowPassword(!showPassword)}
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
-                                {showPassword ? '/' : '.'}
+                                {showPassword ? '🙈' : '👁️'}
                             </button>
                         </div>
                     </div>
@@ -120,7 +173,7 @@ const Signup = ({ onClose, onSwitchToLogin}) => {
                                 onClick={() => setShowPassword(!showPassword)}
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
-                                {showPassword ? '/' : '.'}
+                                {showPassword ? '🙈' : '👁️'}
                             </button>
                         </div>
                     </div>
@@ -136,7 +189,7 @@ const Signup = ({ onClose, onSwitchToLogin}) => {
                                 className="signup-link"
                                 onClick={onSwitchToLogin}
                             >
-                                <Link to="/login" style={{color: 'aqua', fontSize: '13x'}}>Sign In</Link>
+                                <Link to="/login" style={{ color: 'aqua', fontSize: '13px' }}>Sign In</Link>
                             </button>
                         </p>
                     </div>

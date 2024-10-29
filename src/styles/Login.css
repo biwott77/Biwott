@@ -330,3 +330,39 @@ body.modal-open {
   color: #61dafb;
 }
 
+.error-msg, .success-msg {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    z-index: 1000;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.error-msg {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff3333;
+    border: 1px solid #ff3333;
+}
+
+.success-msg {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: #00cc00;
+    border: 1px solid #00cc00;
+}
+
+.fade-out {
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+

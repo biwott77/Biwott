@@ -1,11 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/Home.css';
 import atbash from './atbash.jpg';
 import wwww from './wwww.jpg';
 import final from './final.png';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+
+  // Authentication check
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!token || !user) {
+      navigate('/login');
+      return;
+    }
+
+    setUserData(user);
+
+    // Verify token
+    const verifyToken = async () => {
+      try {
+        await axios.get('http://localhost:8080/protected', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+      } catch (error) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/login');
+      }
+    };
+
+    verifyToken();
+  }, [navigate]);
+
+  // Add logout function
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
   const [text] = useTypewriter({
     words: ['Developer', 'Designer', 'Creator', 'Surgeon', 'Specialist'],
     loop: true,
@@ -78,6 +120,12 @@ const HomePage = () => {
   
   return (
     <div className="home">
+      <nav className="home-nav">
+        <h3>Welcome, {userData?.username}! 👋</h3>
+        <button onClick={handleLogout} className="logout-button">
+          Logout
+        </button>
+      </nav>
       <div className="animated-thank-you">
         <p>Thank you for visiting my site!</p>
       </div>

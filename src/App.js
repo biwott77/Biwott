@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from './Frontend/Navbar';
@@ -17,11 +16,18 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   const handleCloseLogin = () => {
+    console.log('Closing login modal'); // Debug log
     setShowLogin(false);
   };
+
+  const handleOpenLogin = () => {
+    console.log('Opening login modal'); // Debug log
+    setShowLogin(true);
+  };
+
   return (
     <>
-      <Navbar />
+      <Navbar onLoginClick={handleOpenLogin} />
       <Routes location={location}>
         <Route
           path="/"
@@ -51,8 +57,7 @@ function App() {
           path="/login"
           element={
             <AnimatePresence mode="wait">
-              <Login key="login" onClose={handleCloseLogin} />
-              {showLogin && <Login onClose={handleCloseLogin} />}
+              {showLogin && <Login key="login" onClose={handleCloseLogin} />}
             </AnimatePresence>
           }
         />

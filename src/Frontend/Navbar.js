@@ -35,7 +35,10 @@ const Navbar = () => {
 
         {/* Auth Buttons */}
         <div className={`auth-buttons ${isOpen ? 'active' : ''}`} style={{marginRight: '50px'}}>
-          <Link to="/login" className="login-btn">Login</Link>
+          {/* Change Login Link to a button that triggers onLoginClick */}
+          <button className="login-btn">
+            Login
+          </button>
           <Link to="/signup" className="signup-btn">Sign Up</Link>
         </div>
       </div>

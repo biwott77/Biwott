@@ -28,21 +28,21 @@ const Login = ({ onClose, onSwitchToSignup }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={onClose} // Close modal when clicking outside
         >
             <motion.div 
                 className="login-modal"
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -50, opacity: 0 }}
-                onClick={e => e.stopPropagation()}
+                onClick={e => e.stopPropagation()} // Prevent closing when clicking inside
             >
                 <div className="login-header">
                     <h2>Welcome Back</h2>
                     <p className="login-subtitle">Please enter your details</p>
                     <button 
                         className="login-close-button"
-                        onClick={onClose}
+                        onClick={onClose} // Close modal when "X" is clicked
                         aria-label="Close"
                     >
                         X
@@ -87,7 +87,7 @@ const Login = ({ onClose, onSwitchToSignup }) => {
                                 onClick={() => setShowPassword(!showPassword)}
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
-                                {showPassword ? '👁️' : '👁️‍🗨️'}
+                                {showPassword ? '/' : '.'}
                             </button>
                         </div>
                     </div>

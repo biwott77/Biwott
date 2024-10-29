@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import '../styles/Auth.css';
 
 const SignUp = ({ onClose }) => {
@@ -9,26 +8,13 @@ const SignUp = ({ onClose }) => {
     email: '',
     password: ''
   });
-  const [error, setError] = useState('');
+  const [error] = useState('');
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8080/api/signup', formData);
-      console.log('Signup successful:', response.data);
-      // Handle successful signup (e.g., redirect to login)
-      onClose();
-    } catch (error) {
-      setError('Email already exists');
-      console.error('Error signing up:', error.response.data);
-    }
   };
 
   return (
@@ -51,7 +37,7 @@ const SignUp = ({ onClose }) => {
 
         {error && <p className="error-message">{error}</p>}
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="auth-form">
           <div className="form-group">
             <label htmlFor="name">Full Name</label>
             <input 

@@ -224,6 +224,11 @@
     padding: 0.4rem 1rem;
     font-size: 0.8rem;
     flex-direction: column;
+    
+  }
+  .signup-btn{
+    margin-left: 20px;
+    margin-top: 2px;
   }
 }
 

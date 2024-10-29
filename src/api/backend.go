@@ -68,11 +68,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	// Route handling
 	switch r.URL.Path {
-	case "/Frontend/signup":
+	case "/api/signup":
 		handleSignup(w, r, db)
-	case "/Frontend/login":
+	case "/api/login":
 		handleLogin(w, r)
-	case "/Frontend/protected":
+	case "/api/protected":
 		handleProtected(w, r)
 	default:
 		http.Error(w, "Not found", http.StatusNotFound)

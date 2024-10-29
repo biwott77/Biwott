@@ -30,7 +30,7 @@ const Login = ({ onClose, onSwitchToSignup }) => {
         setSuccessMessage('');
 
         try {
-            const response = await axios.post(`${API_URL}/api/login`, {
+            const response = await axios.post('https://api-olive-rho-65.vercel.app/api/login', {
                 email: formData.email,
                 password: formData.password
             }, {

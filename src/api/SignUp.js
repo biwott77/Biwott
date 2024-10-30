@@ -4,7 +4,8 @@ import '../styles/SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'https://api-olive-rho-65.vercel.app';
+// Updated API_URL to your Go API endpoint
+const API_URL = 'https://back-cbgjbjaoz-mois-projects-2e2312ad.vercel.app';
 
 const Signup = ({ onClose, onSwitchToLogin }) => {
     const navigate = useNavigate();

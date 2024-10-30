@@ -4,7 +4,8 @@ import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'https://api-olive-rho-65.vercel.app';
+// Updated API_URL to your Go API endpoint
+const API_URL = 'https://back-cbgjbjaoz-mois-projects-2e2312ad.vercel.app';
 
 const Login = ({ onClose, onSwitchToSignup }) => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Login = ({ onClose, onSwitchToSignup }) => {
         setSuccessMessage('');
 
         try {
-            const response = await axios.post('https://api-olive-rho-65.vercel.app/api/login', {
+            const response = await axios.post(`${API_URL}/api/login`, {
                 email: formData.email,
                 password: formData.password
             }, {
@@ -47,7 +48,7 @@ const Login = ({ onClose, onSwitchToSignup }) => {
                 
                 setTimeout(() => {
                     onClose(); // Close the modal
-                    navigate('/homepage'); // Redirect to homepage
+                    navigate('/'); // Redirect to homepage
                 }, 2000);
             }
         } catch (err) {

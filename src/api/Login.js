@@ -4,8 +4,7 @@ import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-// Updated API_URL to your Go API endpoint
-const API_URL = 'https://back-cbgjbjaoz-mois-projects-2e2312ad.vercel.app';
+const API_URL = 'https://api-8maj9wzty-mois-projects-2e2312ad.vercel.app';
 
 const Login = ({ onClose, onSwitchToSignup }) => {
     const navigate = useNavigate();
@@ -34,26 +33,31 @@ const Login = ({ onClose, onSwitchToSignup }) => {
             const response = await axios.post(`${API_URL}/api/login`, {
                 email: formData.email,
                 password: formData.password
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
             });
 
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+                localStorage.setItem('userInfo', JSON.stringify({
+                    username: response.data.user.username,
+                    email: response.data.user.email,
+                    role: response.data.user.role
+                }));
                 
                 setSuccessMessage('Login successful! Redirecting to homepage...');
                 
                 setTimeout(() => {
-                    onClose(); // Close the modal
+                    onClose();
                     navigate('/'); // Redirect to homepage
                 }, 2000);
             }
         } catch (err) {
-            setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
+            setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
         }
+    };
+
+    const handleClose = () => {
+        navigate('/');
+        if (onClose) onClose();
     };
 
     return (
@@ -79,7 +83,7 @@ const Login = ({ onClose, onSwitchToSignup }) => {
                     <p className="login-subtitle">Please login to your account</p>
                     <button 
                         className="login-close-button"
-                        onClick={onClose}
+                        onClick={handleClose}
                         aria-label="Close"
                     >
                         X

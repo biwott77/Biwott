@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate, useNavigate } from "react-router-dom";
 import Navbar from './api/Navbar';
 import Login from './api/Login';
 import SignUp from './api/SignUp';
@@ -13,68 +13,63 @@ import './styles/App.css';
 
 function App() {
   const location = useLocation();
-  const [isLoginOpen, setLoginOpen] = useState(false);
-  const [isSignupOpen, setSignupOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLoginOpen = () => {
-    setLoginOpen(true);
-  };
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userInfoStr = localStorage.getItem('userInfo');
+    if (token && userInfoStr) {
+      setIsLoggedIn(true);
+      setUserInfo(JSON.parse(userInfoStr));
+    }
+  }, []);
 
-  const handleSignupOpen = () => {
-    setSignupOpen(true);
+  // Protected Route component
+  const ProtectedRoute = ({ children }) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return <Navigate to="/login" />;
+    }
+    return children;
   };
 
   const handleClose = () => {
-    setLoginOpen(false);
-    setSignupOpen(false);
+    navigate('/');
   };
 
   return (
     <>
-      <Navbar onLoginClick={handleLoginOpen} onSignupClick={handleSignupOpen} />
-      <Routes location={location}>
-        <Route
-          path="/"
-          element={
-            <AnimatePresence mode="wait">
-              <HomePage key="home" />
-            </AnimatePresence>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <AnimatePresence mode="wait">
-              <AboutPage key="about" />
-            </AnimatePresence>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <AnimatePresence mode="wait">
-              <ProjectsPage key="projects" />
-            </AnimatePresence>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <AnimatePresence mode="wait">
-              {isLoginOpen && <Login key="login" onClose={handleClose} onSwitchToSignup={handleSignupOpen} />}
-            </AnimatePresence>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <AnimatePresence mode="wait">
-              {isSignupOpen && <SignUp key="signup" onClose={handleClose}  onSwitchToLogin={handleLoginOpen}/>}
-            </AnimatePresence>
-          }
-        />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+      <Navbar 
+        isLoggedIn={isLoggedIn}
+        userInfo={userInfo}
+      />
+      <div className="main-content">
+        <Routes location={location}>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <AnimatePresence mode="wait">
+                  <HomePage key="home" />
+                </AnimatePresence>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route 
+            path="/login" 
+            element={<Login onClose={handleClose} />} 
+          />
+          <Route 
+            path="/signup" 
+            element={<SignUp onClose={handleClose} />} 
+          />
+        </Routes>
+      </div>
       <Footer />
     </>
   );

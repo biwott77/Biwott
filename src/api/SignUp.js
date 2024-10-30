@@ -4,8 +4,7 @@ import '../styles/SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-// Updated API_URL to your Go API endpoint
-const API_URL = 'https://back-cbgjbjaoz-mois-projects-2e2312ad.vercel.app';
+const API_URL = 'https://api-8maj9wzty-mois-projects-2e2312ad.vercel.app';
 
 const Signup = ({ onClose, onSwitchToLogin }) => {
     const navigate = useNavigate();
@@ -42,37 +41,30 @@ const Signup = ({ onClose, onSwitchToLogin }) => {
             const response = await axios.post(`${API_URL}/api/signup`, {
                 username: formData.username,
                 email: formData.email,
-                password: formData.password,
-                passwordConfirm: formData.passwordConfirm
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                password: formData.password
             });
 
-            if (response.status === 201) {
-                setSuccessMessage('Registration successful! Redirecting to login...');
-                
-                // Clear form
-                setFormData({
-                    username: '',
-                    email: '',
-                    password: '',
-                    passwordConfirm: ''
-                });
+            setSuccessMessage(response.data.message)
+            
+            // Clear form
+            setFormData({
+                username: '',
+                email: '',
+                password: '',
+                passwordConfirm: ''
+            });
 
-                // Wait 2 seconds then redirect
-                setTimeout(() => {
-                    if (onSwitchToLogin) {
-                        onSwitchToLogin(); // If using modal switching
-                    } else {
-                        navigate('/login'); // If using route navigation
-                    }
-                }, 2000);
-            }
+            // Wait 2 seconds then redirect
+            setTimeout(() => {
+                if (onSwitchToLogin) {
+                    onSwitchToLogin();
+                } else {
+                    navigate('/login');
+                }
+            }, 2000);
+
         } catch (err) {
-            setError(err.response?.data?.error || 'Registration failed. Please try again.');
-            setTimeout(() => setError(''), 5000); // Clear error after 5 seconds
+            setError(err.response?.data?.message || "Email already taken");
         }
     };
 
@@ -112,7 +104,6 @@ const Signup = ({ onClose, onSwitchToLogin }) => {
                         <input 
                             type="text"
                             id="username"
-                            name="username"
                             value={formData.username}
                             onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                             placeholder="Enter your username"
@@ -125,7 +116,6 @@ const Signup = ({ onClose, onSwitchToLogin }) => {
                         <input 
                             type="email"
                             id="email"
-                            name="email"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="Enter your email"
@@ -139,7 +129,6 @@ const Signup = ({ onClose, onSwitchToLogin }) => {
                             <input 
                                 type={showPassword ? "text" : "password"}
                                 id="password"
-                                name="password"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                 placeholder="Enter your password"
@@ -162,7 +151,6 @@ const Signup = ({ onClose, onSwitchToLogin }) => {
                             <input 
                                 type={showPassword ? "text" : "password"}
                                 id="passwordConfirm"
-                                name="passwordConfirm"
                                 value={formData.passwordConfirm}
                                 onChange={(e) => setFormData({ ...formData, passwordConfirm: e.target.value })}
                                 placeholder="Confirm your password"

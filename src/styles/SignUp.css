@@ -227,3 +227,31 @@ body.modal-open {
     padding: 12px;
   }
 }
+
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 1000;
+    animation: fadeInOut 2s ease-in-out;
+}
+
+.notification.error {
+    background-color: #ff4444;
+    color: white;
+}
+
+.notification.success {
+    background-color: #00C851;
+    color: white;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { opacity: 0; }
+}

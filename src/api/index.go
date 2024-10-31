@@ -1,183 +1,222 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
+	"regexp"
+	"strings"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
-	"github.com/go-sql-driver/mysql"
+	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-var db *sql.DB
-var jwtKey = []byte("your_secret_key") // Replace with a secure secret key
+// Global DB instance
+var db *gorm.DB
 
+// User model - updated with gorm tags
 type User struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
+	ID        uint      `json:"id" gorm:"primaryKey"`
+	Username  string    `json:"username" gorm:"unique;not null"`
+	Email     string    `json:"email" gorm:"unique;not null"`
+	Password  string    `json:"password" gorm:"not null"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// LoginRequest structure for login endpoint
+type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-type LoginResponse struct {
-	Token string `json:"token"`
-	User  User   `json:"user"`
+// JWT configuration
+type JWTClaim struct {
+	Email string `json:"email"`
+	jwt.RegisteredClaims
 }
 
-// Initialize DB connection
-func initDB() error {
-	dsn := "username:password@tcp(localhost:3306)/dbname" // Update with your DB credentials
+var jwtKey = []byte("your_secret_key") // Use environment variable in production
+
+// validatePassword checks if password meets security requirements
+func validatePassword(password string) error {
+	if len(password) < 6 {
+		return errors.New("Password must be at least 6 characters")
+	}
+	return nil
+}
+
+// validateEmail checks if email is valid
+func validateEmail(email string) error {
+	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
+	if !emailRegex.MatchString(email) {
+		return errors.New("invalid email format")
+	}
+	return nil
+}
+
+func main() {
+	// Database connection
+	dsn := "moi:ruth@golang77@tcp(127.0.0.1:3306)/backend?charset=utf8mb4&parseTime=True&loc=Local"
 	var err error
-	db, err = sql.Open("mysql", dsn)
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		return err
-	}
-	return db.Ping()
-}
-
-// Main handler function
-func Handler(w http.ResponseWriter, r *http.Request) {
-	// Set CORS headers
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000") // Update with your frontend URL
-	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-
-	// Handle preflight requests
-	if r.Method == "OPTIONS" {
-		w.WriteHeader(http.StatusOK)
-		return
+		log.Fatal("Failed to connect to database:", err)
 	}
 
-	// Initialize DB connection for each request
-	if err := initDB(); err != nil {
-		log.Printf("Database connection error: %v", err)
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-		return
-	}
-	defer db.Close()
+	// Auto migrate the schema
+	db.AutoMigrate(&User{})
 
-	// Route handling
-	switch r.URL.Path {
-	case "/api/signup":
-		SignupHandler(w, r)
-	case "/api/login":
-		LoginHandler(w, r)
-	default:
-		http.Error(w, "Not found", http.StatusNotFound)
+	// Create a mux and apply CORS middleware to all routes
+	mux := http.NewServeMux()
+	mux.HandleFunc("/api/signup", signUp)
+	mux.HandleFunc("/api/login", login)
+
+	// Apply CORS middleware to all routes
+	handler := corsMiddleware(mux)
+
+	log.Println("Server starting on :8080")
+	if err := http.ListenAndServe(":8080", handler); err != nil {
+		log.Fatal("Server Run Failed:", err)
 	}
 }
 
-func SignupHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+func corsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Allow both your production and development origins
+		origin := r.Header.Get("Origin")
+		allowedOrigins := []string{
+			"http://localhost:3000",
+			"https://your-frontend-domain.com", // Replace with your actual domain
+		}
+
+		for _, allowed := range allowedOrigins {
+			if origin == allowed {
+				w.Header().Set("Access-Control-Allow-Origin", origin)
+				break
+			}
+		}
+
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+func signUp(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
 	var user User
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{"message": "Invalid input"})
 		return
 	}
 
-	// Check for existing user
-	var existingUser User
-	err := db.QueryRow("SELECT * FROM users WHERE email = ?", user.Email).Scan(
-		&existingUser.ID, &existingUser.Username, &existingUser.Email, &existingUser.Password,
-	)
-	if err != sql.ErrNoRows {
-		w.WriteHeader(http.StatusConflict)
-		json.NewEncoder(w).Encode(map[string]string{
-			"message": "Email already taken",
-		})
+	// Validation
+	if err := validatePassword(user.Password); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	if err := validateEmail(user.Email); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	// Hash password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
-		http.Error(w, "Server error", http.StatusInternalServerError)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
 	}
 
-	// Insert new user
-	result, err := db.Exec(
-		"INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-		user.Username, user.Email, hashedPassword,
-	)
-	if err != nil {
-		if mysqlErr, ok := err.(*mysql.MySQLError); ok && mysqlErr.Number == 1062 {
-			http.Error(w, "Email already exists", http.StatusConflict)
+	// Prepare user for database
+	user.Password = string(hashedPassword)
+	user.Email = strings.ToLower(user.Email)
+
+	// Save to database
+	result := db.Create(&user)
+	if result.Error != nil {
+		if strings.Contains(result.Error.Error(), "duplicate") {
+			http.Error(w, "Email already registered", http.StatusConflict)
 			return
 		}
-		http.Error(w, "Server error", http.StatusInternalServerError)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
 	}
 
-	lastID, _ := result.LastInsertId()
-	user.ID = int(lastID)
-	user.Password = "" // Don't send password back
-
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"message": "User created successfully",
-		"user":    user,
-	})
+	// Return success response
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"message": "User registered successfully"})
 }
 
-func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+func login(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	var loginData struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
-
-	if err := json.NewDecoder(r.Body).Decode(&loginData); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
+	var loginReq LoginRequest
+	if err := json.NewDecoder(r.Body).Decode(&loginReq); err != nil {
+		http.Error(w, "Invalid input", http.StatusBadRequest)
 		return
 	}
 
+	// Find user in database
 	var user User
-	var hashedPassword string
-	err := db.QueryRow(
-		"SELECT id, username, email, password FROM users WHERE email = ?",
-		loginData.Email,
-	).Scan(&user.ID, &user.Username, &user.Email, &hashedPassword)
-
-	if err == sql.ErrNoRows {
-		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
-		return
-	} else if err != nil {
-		http.Error(w, "Server error", http.StatusInternalServerError)
+	result := db.Where("email = ?", strings.ToLower(loginReq.Email)).First(&user)
+	if result.Error != nil {
+		http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 		return
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(loginData.Password)); err != nil {
-		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+	// Verify password
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginReq.Password)); err != nil {
+		http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 		return
 	}
 
-	// Generate JWT
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": user.ID,
-		"email":   user.Email,
-		"exp":     time.Now().Add(time.Hour * 24).Unix(),
-	})
+	// Generate JWT token
+	claims := &JWTClaim{
+		Email: user.Email,
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+			NotBefore: jwt.NewNumericDate(time.Now()),
+		},
+	}
 
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
-		http.Error(w, "Server error", http.StatusInternalServerError)
+		http.Error(w, "Failed to generate token", http.StatusInternalServerError)
 		return
 	}
 
-	user.Password = "" // Don't send password back
-	json.NewEncoder(w).Encode(LoginResponse{
-		Token: tokenString,
-		User:  user,
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"token": tokenString,
+		"user": map[string]string{
+			"username": user.Username,
+			"email":    user.Email,
+		},
 	})
 }

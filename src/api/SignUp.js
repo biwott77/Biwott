@@ -4,7 +4,7 @@ import '../styles/SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'https://api-8maj9wzty-mois-projects-2e2312ad.vercel.app';
+const API_URL = 'http://localhost:8080';
 
 const Signup = ({ onClose, onSwitchToLogin }) => {
     const navigate = useNavigate();

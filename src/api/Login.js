@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-const API_URL = 'https://api-8maj9wzty-mois-projects-2e2312ad.vercel.app';
+import { API_URL } from './config';
 
 const Login = ({ onClose, onSwitchToSignup }) => {
     const navigate = useNavigate();

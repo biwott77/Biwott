@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
 import { Route, Routes, useLocation, Navigate, useNavigate } from "react-router-dom";
 import Navbar from './api/Navbar';
 import Login from './api/Login';
@@ -46,28 +45,28 @@ function App() {
         userInfo={userInfo}
       />
       <div className="main-content">
-        <Routes location={location}>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <AnimatePresence mode="wait">
-                  <HomePage key="home" />
-                </AnimatePresence>
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route 
-            path="/login" 
-            element={<Login onClose={handleClose} />} 
-          />
-          <Route 
-            path="/signup" 
-            element={<SignUp onClose={handleClose} />} 
-          />
+        <Routes location={location} key={location.pathname}>
+          {/* Public routes */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login onClose={handleClose} />} />
+          <Route path="/signup" element={<SignUp onClose={handleClose} />} />
+          
+          {/* Protected routes */}
+          <Route path="/about" element={
+            <ProtectedRoute>
+              <AboutPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/projects" element={
+            <ProtectedRoute>
+              <ProjectsPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/contact" element={
+            <ProtectedRoute>
+              <ContactPage />
+            </ProtectedRoute>
+          } />
         </Routes>
       </div>
       <Footer />

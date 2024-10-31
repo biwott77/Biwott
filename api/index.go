@@ -1,11 +1,10 @@
-package handler
+package main
 
 import (
 	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -14,7 +13,7 @@ import (
 )
 
 var db *sql.DB
-var jwtKey = []byte(os.Getenv("JWT_SECRET"))
+var jwtKey = []byte("your_secret_key") // Replace with a secure secret key
 
 type User struct {
 	ID       int    `json:"id"`
@@ -30,7 +29,7 @@ type LoginResponse struct {
 
 // Initialize DB connection
 func initDB() error {
-	dsn := os.Getenv("DATABASE_URL")
+	dsn := "username:password@tcp(localhost:3306)/dbname" // Update with your DB credentials
 	var err error
 	db, err = sql.Open("mysql", dsn)
 	if err != nil {
@@ -39,10 +38,10 @@ func initDB() error {
 	return db.Ping()
 }
 
-// Main handler function for Vercel
+// Main handler function
 func Handler(w http.ResponseWriter, r *http.Request) {
 	// Set CORS headers
-	w.Header().Set("Access-Control-Allow-Origin", os.Getenv("FRONTEND_URL"))
+	w.Header().Set("Access-Control-Allow-Origin", "*") // Update for production
 	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
@@ -181,4 +180,9 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		Token: tokenString,
 		User:  user,
 	})
+}
+
+func main() {
+	http.HandleFunc("/", Handler)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

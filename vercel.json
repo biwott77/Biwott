@@ -2,19 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/*.go",
+      "src": "/api/*.go",
       "use": "@vercel/go"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.go"
+      "dest": "/api"
     }
-  ],
-  "env": {
-    "DATABASE_URL": "moi:ruth@golang77@tcp(192.168.67.32:3306)/backend",
-    "JWT_SECRET": "SCeNP7DBC0d9YKrhK1ykeu5rlV7hxRayay97ZcIL6pQ=",
-    "FRONTEND_URL": "https://moi-7.vercel.app/"
-  }
+  ]
 } 

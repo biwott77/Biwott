@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:8080';
 
 const Signup = ({ onClose, onSwitchToLogin }) => {
     const navigate = useNavigate();
@@ -26,7 +23,7 @@ const Signup = ({ onClose, onSwitchToLogin }) => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
         setSuccessMessage('');
@@ -37,35 +34,25 @@ const Signup = ({ onClose, onSwitchToLogin }) => {
             return;
         }
 
-        try {
-            const response = await axios.post(`${API_URL}/api/signup`, {
-                username: formData.username,
-                email: formData.email,
-                password: formData.password
-            });
+        // Simulate successful signup for demonstration
+        setSuccessMessage('Registration successful!');
 
-            setSuccessMessage(response.data.message)
-            
-            // Clear form
-            setFormData({
-                username: '',
-                email: '',
-                password: '',
-                passwordConfirm: ''
-            });
+        // Clear form
+        setFormData({
+            username: '',
+            email: '',
+            password: '',
+            passwordConfirm: ''
+        });
 
-            // Wait 2 seconds then redirect
-            setTimeout(() => {
-                if (onSwitchToLogin) {
-                    onSwitchToLogin();
-                } else {
-                    navigate('/login');
-                }
-            }, 2000);
-
-        } catch (err) {
-            setError(err.response?.data?.message || "Email already taken");
-        }
+        // Wait 2 seconds then redirect
+        setTimeout(() => {
+            if (onSwitchToLogin) {
+                onSwitchToLogin();
+            } else {
+                navigate('/login');
+            }
+        }, 2000);
     };
 
     return (

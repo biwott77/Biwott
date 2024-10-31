@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL } from './config';
 
 const Login = ({ onClose, onSwitchToSignup }) => {
     const navigate = useNavigate();
@@ -23,34 +21,28 @@ const Login = ({ onClose, onSwitchToSignup }) => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
         setSuccessMessage('');
 
-        try {
-            const response = await axios.post(`${API_URL}/api/login`, {
+        // Simulate a successful login for demonstration
+        if (formData.email && formData.password) {
+            localStorage.setItem('token', 'dummy-token');
+            localStorage.setItem('userInfo', JSON.stringify({
+                username: 'DemoUser',
                 email: formData.email,
-                password: formData.password
-            });
+                role: 'user'
+            }));
 
-            if (response.status === 200) {
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('userInfo', JSON.stringify({
-                    username: response.data.user.username,
-                    email: response.data.user.email,
-                    role: response.data.user.role
-                }));
-                
-                setSuccessMessage('Login successful! Redirecting to homepage...');
-                
-                setTimeout(() => {
-                    onClose();
-                    navigate('/'); // Redirect to homepage
-                }, 2000);
-            }
-        } catch (err) {
-            setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+            setSuccessMessage('Login successful! Redirecting to homepage...');
+
+            setTimeout(() => {
+                onClose();
+                navigate('/'); // Redirect to homepage
+            }, 2000);
+        } else {
+            setError('Please enter valid credentials.');
         }
     };
 
